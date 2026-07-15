@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DP BOSS - KALYAN FIX GAME | Official</title>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1344814460477866');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1344814460477866&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&family=Noto+Sans+Devanagari:wght=400;700;900&display=swap');
+        
+        :root {
+            --primary-blue: #0088cc;
+            --telegram-gradient: linear-gradient(135deg, #229ED9 0%, #1274a5 100%);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+            background-color: #020617;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            h1 { font-size: 2.5rem !important; }
+            .mobile-padding { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-500/30">
+
+    <!-- Urgent Notification Bar -->
+    <div class="fixed top-0 left-0 w-full z-[100] bg-red-600/90 backdrop-blur-md text-white py-2 px-4 text-center text-xs md:text-sm font-bold border-b border-red-500/30">
+        <span class="inline-flex items-center gap-2">
+            <span class="flex h-2 w-2 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+            आज का फिक्स गेम टेलीग्राम पर डाल दिया गया है! जल्दी देखें 
+        </span>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-purple-600/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <nav class="pt-16 pb-6 px-6 max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-yellow-400 rounded-xl flex items-center justify-center shadow-lg shadow-yellow-400/20">
+                <span class="text-black font-black text-xl">D</span>
+            </div>
+            <span class="text-xl font-black tracking-tighter uppercase text-white">DP BOSS</span>
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-400">
+            <a href="#" class="hover:text-white transition-colors">रिजल्ट</a>
+            <a href="#" class="hover:text-white transition-colors">चार्ट</a>
+            <a href="#" class="hover:text-white transition-colors">फिक्स गेम</a>
+        </div>
+        <div class="flex items-center gap-2 px-3 py-1.5 glass-card !rounded-full text-xs font-bold border-green-500/30">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span id="active-users-nav">5,420</span> ONLINE
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative px-6 pt-12 pb-24 text-center">
+        <div class="max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-bold mb-8 animate-float">
+                <i data-lucide="award" class="w-4 h-4"></i>
+                भारत का नंबर 1 सट्टा मटका प्लेटफॉर्म
+            </div>
+
+            <h1 class="text-5xl md:text-8xl font-black mb-6 leading-tight tracking-tight uppercase">
+                कल्याण <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 glow-text">फिक्स गेम</span> <br/>
+                <span class="text-blue-400">धमाका 2026</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                रोजाना 100% पास <span class="text-white font-bold underline decoration-green-500 decoration-2 underline-offset-4">सिंगल जोड़ी और पन्ना</span> बिल्कुल फ्री में प्राप्त करें।
+            </p>
+
+            <!-- Main CTA -->
+            <div class="relative group max-w-md mx-auto">
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-3xl blur opacity-40 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                <button 
+                    onclick="handleJoinClick(event)"
+                    class="shimmer-btn relative w-full flex items-center justify-center gap-4 bg-gradient-to-br from-[#229ED9] to-[#0088cc] text-white px-8 py-6 rounded-2xl font-black text-2xl md:text-3xl transition-all shadow-2xl active:scale-95"
+                >
+                    <i data-lucide="send" class="w-8 h-8 md:w-10 md:h-10 fill-white"></i>
+                    अभी ज्वाइन करें
+                </button>
+                <p class="mt-4 text-slate-500 text-sm font-medium">ज्वाइन करना बिल्कुल फ्री है • 100% फिक्स गेम</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats / Features Grid -->
+    <section class="max-w-6xl mx-auto px-6 -mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <!-- Feature 1 -->
+        <div class="glass-card p-8 group hover:bg-white/5 transition-all duration-300">
+            <div class="w-14 h-14 bg-yellow-400/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-500 group-hover:scale-110 transition-transform">
+                <i data-lucide="zap" class="w-8 h-8 fill-yellow-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">सबसे तेज़ रिजल्ट</h3>
+            <p class="text-slate-500 leading-relaxed">मार्केट खुलते ही सबसे पहले सटिक रिजल्ट केवल हमारे टेलीग्राम पर मिलेगा।</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="glass-card p-8 group hover:bg-white/5 transition-all duration-300 border-green-500/20">
+            <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 text-green-500 group-hover:scale-110 transition-transform">
+                <i data-lucide="check-circle" class="w-8 h-8 fill-green-500"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">100% गारंटीड पास</h3>
+            <p class="text-slate-500 leading-relaxed">हमारे एक्सपर्ट गेसर्स के द्वारा रिसर्च किया गया 100% फिक्स गेम डेली पास।</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="glass-card p-8 group hover:bg-white/5 transition-all duration-300">
+            <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
+                <i data-lucide="trending-up" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">लाइव अपडेट्स</h3>
+            <p class="text-slate-500 leading-relaxed">मार्केट की हर हलचल और बदलाव की जानकारी तुरंत नोटिफिकेशन के साथ।</p>
+        </div>
+    </section>
+
+    <!-- Winning Proof / Trust Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-3xl mx-auto glass-card p-1 md:p-10 border-blue-500/10 overflow-hidden relative">
+            <div class="absolute top-0 right-0 p-8 opacity-10">
+                <i data-lucide="quote" class="w-32 h-32"></i>
+            </div>
+            <div class="relative z-10 text-center space-y-6 p-6">
+                <div class="flex justify-center gap-1 mb-4">
+                    <i data-lucide="star" class="w-6 h-6 text-yellow-400 fill-yellow-400"></i>
+                    <i data-lucide="star" class="w-6 h-6 text-yellow-400 fill-yellow-400"></i>
+                    <i data-lucide="star" class="w-6 h-6 text-yellow-400 fill-yellow-400"></i>
+                    <i data-lucide="star" class="w-6 h-6 text-yellow-400 fill-yellow-400"></i>
+                    <i data-lucide="star" class="w-6 h-6 text-yellow-400 fill-yellow-400"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black italic">"हजारों लोग रोज जीत रहे हैं, अब आपकी बारी है!"</h2>
+                <p class="text-blue-400 font-bold tracking-[0.2em] uppercase text-sm">देर न करें, मौका हाथ से न जाने दें</p>
+                
+                <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-white" id="counter-members">5,420</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">सक्रिय सदस्य</div>
+                    </div>
+                    <div class="w-px h-10 bg-white/10 hidden md:block"></div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-white">98%</div>
+                        <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">सफलता दर</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secondary CTA -->
+    <section class="py-24 px-6 text-center">
+        <h2 class="text-3xl font-black mb-10 text-white">आज का कल्याण गेम यहाँ देखें </h2>
+        <button 
+            onclick="handleJoinClick(event)"
+            class="group relative inline-flex items-center justify-center gap-3 bg-white text-black px-12 py-5 rounded-2xl font-black text-xl hover:bg-slate-100 transition-all shadow-xl active:scale-95"
+        >
+            <i data-lucide="send" class="w-6 h-6 text-[#229ED9]"></i>
+            टेलीग्राम चैनल से जुड़ें
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#010409] py-16 px-6 text-center border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center justify-center gap-2 mb-8">
+                <div class="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-black text-sm">D</span>
+                </div>
+                <span class="text-lg font-black tracking-tighter uppercase text-white">DP BOSS OFFICIAL</span>
+            </div>
+            
+            <p class="text-slate-500 text-sm leading-relaxed mb-10 max-w-lg mx-auto opacity-60">
+                चेतावनी: यह वेबसाइट केवल मनोरंजन और जानकारी के लिए है। हम किसी भी अवैध गतिविधि का समर्थन नहीं करते हैं। सट्टा मटका आपके देश/राज्य में प्रतिबंधित हो सकता है। 18 वर्ष से कम आयु के लोग दूर रहें।
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-[10px] font-black text-slate-600 uppercase tracking-[0.2em]">
+                <a href="#" class="hover:text-blue-500 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-500 transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-blue-500 transition-colors">Disclaimer</a>
+                <a href="#" class="hover:text-blue-500 transition-colors">Contact</a>
+            </div>
+            <div class="mt-12 text-[10px] text-slate-700">
+                &copy; 2026 DP BOSS MEDIA GROUP. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="fixed bottom-0 left-0 w-full p-4 bg-[#020617]/80 backdrop-blur-xl border-t border-white/5 md:hidden z-50">
+        <button 
+            onclick="handleJoinClick(event)"
+            class="shimmer-btn w-full bg-gradient-to-r from-[#229ED9] to-[#0088cc] text-white py-4 rounded-xl font-black text-lg flex items-center justify-center gap-3 shadow-[0_-8px_30px_-5px_rgba(34,158,217,0.3)]"
+        >
+            <i data-lucide="send" class="w-6 h-6 fill-white"></i>
+            फ्री गेम प्राप्त करें (JOIN)
+        </button>
+    </div>
+
+    <!-- Script Section -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Configuration
+        const telegramLink = "https://t.me/+PUugHtU9bvNlY2Zl";
+        let userCount = 5420;
+
+        // Counter Logic
+        const counterNav = document.getElementById('active-users-nav');
+        const counterMain = document.getElementById('counter-members');
+
+        function updateCounters() {
+            userCount += Math.floor(Math.random() * 5) - 2;
+            const formatted = userCount.toLocaleString();
+            if(counterNav) counterNav.innerText = formatted;
+            if(counterMain) counterMain.innerText = formatted;
+        }
+
+        setInterval(updateCounters, 3000);
+
+        // Click Handler with event safety
+        function handleJoinClick(e) {
+            const btn = e.currentTarget;
+            const originalText = btn.innerHTML;
+            
+            // Visual feedback
+            btn.style.opacity = "0.7";
+            btn.innerHTML = "Opening Telegram...";
+
+            // Track Lead for Facebook Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+            }
+
+            setTimeout(() => {
+                window.location.href = telegramLink;
+                // Revert after a delay in case they come back
+                setTimeout(() => {
+                    btn.style.opacity = "1";
+                    btn.innerHTML = originalText;
+                }, 1000);
+            }, 300);
+        }
+
+        // Smooth reveal animation on scroll (Simplified)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "all 0.6s ease-out";
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
